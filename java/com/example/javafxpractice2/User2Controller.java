@@ -1,15 +1,14 @@
 package com.example.javafxpractice2;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
-public class UserController{
+public class User2Controller {
 
     @FXML
     private TextField addName;
@@ -40,15 +39,19 @@ public class UserController{
 
     @FXML
     private TableView<User2> myTableView;
+    @FXML
+    private TextField searchName;
 
     private int id;
 
     ObservableList<User2> user2List = FXCollections.observableArrayList();
 
+    ObservableList<User2> searchList = FXCollections.observableArrayList();
+
     @FXML
     public void initialize() {
         myTableView.setTableMenuButtonVisible(false);
-        System.out.println(myTableView.getItems());
+//        System.out.println(myTableView.getItems());
         user2List.add(new User2(1, "株式会社A", "山田太郎", 85));
         user2List.add(new User2(2, "株式会社B", "田中宗次", 72));
         user2List.add(new User2(3, "株式会社C", "佐藤道則", 86));
@@ -118,6 +121,24 @@ public class UserController{
 
         user2List.set(this.id -1, updateUser2);
 
+    }
+
+    public void search(){
+        var keyword = searchName.getText();
+        var idSize = user2List.size();
+        for(var i = 0; i < idSize; i++){
+            if(user2List.get(i).getName().contains(searchName.getText())){
+                searchList.add(new User2(i+1, user2List.get(i).getCompany(), user2List.get(i).getName(), user2List.get(i).getScore()));
+            }
+        }
+        myTableView.setItems(searchList);
+
+    }
+
+    public void back(){
+//        var idSize = user2List.size();
+        searchList.clear();
+        myTableView.setItems(user2List);
     }
 
 

@@ -1,12 +1,12 @@
 package com.example.javafxpractice2;
 
-public class User {
+public class User2 {
     private int id;
     private String company;
     private String name;
     private int score;
 
-    public User(int id, String company, String name, int score){
+    public User2(int id, String company, String name, int score){
         this.id = id;
         this.company = company;
         this.name = name;
@@ -44,6 +44,7 @@ public class User {
     public void setScore(int score){
         this.score = score;
     }
+
 
 
 
